@@ -31,7 +31,7 @@ switch ($fase)
         $tamanhoImage = 64;
 
         $grid = new Grid();
-        $grid->abreColuna(4);
+        $grid->abreColuna(2);
         br();
 
         $menu = new MenuGrafico();
@@ -53,16 +53,6 @@ switch ($fase)
         $botao->set_title('Acessa os Sistemas da Uenf');
         $botao->set_accesskey('U');
         $menu->add_item($botao);
-        
-        # PhpMyAdmin
-        $botao = new BotaoGrafico();
-        $botao->set_label('PhpMyAdmin');
-        $botao->set_title('Executa o PhpMyAdmin');
-        $botao->set_target('_blank');
-        $botao->set_image(PASTA_FIGURAS.'mysql.png',$tamanhoImage,$tamanhoImage);
-        $botao->set_url('http://127.0.0.1/phpmyadmin');
-        $menu->add_item($botao);
-
        
         $menu->show();
         $grid->fechaColuna();

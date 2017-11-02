@@ -19,21 +19,51 @@ $page->iniciaPagina();
 # Cabeçalho
 cabecalho();
 
-$grid = new Grid();
-$grid->abreColuna(12);
-
 switch ($fase)
 {	
     # Exibe o Menu Inicial
     case "menu" :
         
         titulo('Intranet da Casa');
+        br();
         $tamanhoImage = 64;
 
         $grid = new Grid();
-        $grid->abreColuna(2);
+        
+        #################################################
+        $grid->abreColuna(4);
+        tituloTable('Filmes & Fotos');
         br();
+        
+        $menu = new MenuGrafico();
+        
+        # Sistemas de Controle financeiro
+        $botao = new BotaoGrafico();
+        $botao->set_label('Filmes');
+        $botao->set_url('filmes.php');
+        $botao->set_image(PASTA_FIGURAS.'video.png',$tamanhoImage,$tamanhoImage);
+        $botao->set_title('Filmes');
+        #$botao->set_accesskey('C');
+        $menu->add_item($botao);
 
+        # Sistemas da Uenf
+        $botao = new BotaoGrafico();
+        $botao->set_label('Fotos');
+        $botao->set_url('#');
+        $botao->set_image(PASTA_FIGURAS.'fotos.png',$tamanhoImage,$tamanhoImage);
+        $botao->set_title('Fotos');
+        #$botao->set_accesskey('U');
+        $menu->add_item($botao);
+       
+        $menu->show();
+        
+        br();            
+        $grid->fechaColuna();        
+        #################################################
+        $grid->abreColuna(4);
+        tituloTable('Outros');
+        br();
+        
         $menu = new MenuGrafico();
         
         # Sistemas de Controle financeiro
@@ -55,11 +85,16 @@ switch ($fase)
         $menu->add_item($botao);
        
         $menu->show();
+        $grid->fechaColuna();     
+        #################################################
+        $grid->abreColuna(4);
+        tituloTable('Aniversariantes');
+        br();
+        
+        br();            
         $grid->fechaColuna();
+        $grid->fechaGrid();
         break;
 }
-
-$grid->fechaColuna();
-$grid->fechaGrid();
 
 $page->terminaPagina();

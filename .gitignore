@@ -1,0 +1,4 @@
+# ignora a pasta de backup
+
+_filmes/
+/nbproject/

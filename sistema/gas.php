@@ -53,13 +53,13 @@ $objeto->set_linkExcluir('?fase=excluir');
 $objeto->set_linkGravar('?fase=gravar');
 $objeto->set_linkListar('?fase=listar');
 $objeto->set_botaoHistorico(FALSE);
-$objeto->set_botaoEditar(FALSE);
-$objeto->set_botaoIncluir(FALSE);
+#$objeto->set_botaoEditar(FALSE);
+#$objeto->set_botaoIncluir(FALSE);
 $objeto->set_log(FALSE);
 #$objeto->set_exibeInfoObrigatoriedade(FALSE);
 #$objeto->set_botaoVoltarForm(FALSE);
 #$objeto->set_topBarIncluir(FALSE);
-$objeto->set_topBarListar(FALSE);
+#$objeto->set_topBarListar(FALSE);
 
 # Parametros da tabela
 $objeto->set_label(array("Data da Compra","Durabilidade"));
@@ -92,30 +92,12 @@ $objeto->set_campos(array(
            'col' => 12,
            'size' => 10)));
 
-# Botão Extra Incluir (usado para a rotina alternativa sem carregar a página)
-$botao = new Button("Incluir");
-$botao->set_title("Inclui nova compra de gás");
-$botao->set_onClick("abreDivId('gasInclusao');fechaDivId('gasLista');");
-
-$objeto->set_botaoListarExtra(array($botao)); 
-
 ################################################################
 switch ($fase)
 {
     case "" :
     case "listar" :
-        
-        $div = new Div("gasInclusao");
-        $div->abre();
-            $objeto->editar();
-        $div->fecha();
-            
-        $div3 = new Div("gasLista");
-        $div3->abre();
         $objeto->listar();
-        $div3->fecha();
-            
-            
         break;
 
     case "editar" :	

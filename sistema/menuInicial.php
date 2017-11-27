@@ -57,7 +57,7 @@ $objeto->set_selectEdita('SELECT data,
 
 # Caminhos
 #$objeto->set_linkEditar('?fase=editar');
-$objeto->set_linkExcluir('?fase=excluir');
+#$objeto->set_linkExcluir('?fase=excluir');
 $objeto->set_linkGravar('?fase=gravar');
 $objeto->set_linkListar('?');
 $objeto->set_botaoHistorico(FALSE);
@@ -124,7 +124,7 @@ switch ($fase)
 
             $menu = new MenuGrafico();
 
-            # Sistemas de Controle financeiro
+            # Filmes
             $botao = new BotaoGrafico();
             $botao->set_label('Filmes');
             $botao->set_url('filmes.php');
@@ -133,7 +133,7 @@ switch ($fase)
             #$botao->set_accesskey('C');
             $menu->add_item($botao);
 
-            # Sistemas da Uenf
+            # Fotos
             $botao = new BotaoGrafico();
             $botao->set_label('Fotos');
             $botao->set_url('#');
@@ -153,11 +153,20 @@ switch ($fase)
             $menu = new MenuGrafico();
 
             # Sistemas da Uenf
+            # Sistemas de Controle Financeiro
             $botao = new BotaoGrafico();
-            $botao->set_label('Controle do Gás');
-            $botao->set_url('gas.php');
-            $botao->set_image(PASTA_FIGURAS.'gas.png',$tamanhoImage,$tamanhoImage);
-            $botao->set_title('Controle da frequência de compra do gás de cozinha');
+            $botao->set_label('Financeiro');
+            $botao->set_url('../../financeiro/sistema/login.php');
+            $botao->set_image(PASTA_FIGURAS.'dinheiro.jpg',$tamanhoImage,$tamanhoImage);
+            $botao->set_title('Acessa o Sistema Financeiro Pessoal');
+            $menu->add_item($botao);
+            
+            # Sistemas de Controle Despesas com o carro
+            $botao = new BotaoGrafico();
+            $botao->set_label('Manutenção do Carro');
+            $botao->set_url('carro.php');
+            $botao->set_image(PASTA_FIGURAS.'carro.png',$tamanhoImage,$tamanhoImage);
+            $botao->set_title('Acessa o sistema de controle das manutenções do carro');
             $menu->add_item($botao);
 
             $menu->show();
@@ -170,7 +179,7 @@ switch ($fase)
 
             $menu = new MenuGrafico();
 
-            # Sistemas de Controle financeiro
+            # Go Read
             $botao = new BotaoGrafico();
             $botao->set_label('GoRead');
             $botao->set_url('https://www.goread.com.br/login');
@@ -179,7 +188,7 @@ switch ($fase)
             #$botao->set_accesskey('C');
             $menu->add_item($botao);
 
-            # Sistemas da Uenf
+            # Notícias
             $botao = new BotaoGrafico();
             $botao->set_label('Notícias');
             $botao->set_url('?fase=noticias');
@@ -198,13 +207,7 @@ switch ($fase)
 
             $menu = new MenuGrafico();
 
-           # Sistemas de Controle financeiro
-            $botao = new BotaoGrafico();
-            $botao->set_label('Controle Financeiro');
-            $botao->set_url('../../financeiro/sistema/login.php');
-            $botao->set_image(PASTA_FIGURAS.'dinheiro.jpg',$tamanhoImage,$tamanhoImage);
-            $botao->set_title('Acessa o Sistema Financeiro Pessoal');
-            $menu->add_item($botao);
+           
 
             # Sistemas da Uenf
             $botao = new BotaoGrafico();
@@ -222,24 +225,33 @@ switch ($fase)
             #################################################
             $grid1->abreColuna(12,4);
             tituloTable('Controle do Gás');
-                
-                $div = new Div("gasInclusao");
-                $div->abre();
-                    $objeto->editar();
-                $div->fecha();
+            
+            $div = new Div("gasInclusao");
+            $div->abre();
+                $objeto->editar();
+            $div->fecha();
 
-                $div3 = new Div("gasLista");
-                $div3->abre();
-                $objeto->listar();
-                
-                # Link de inclusão
-                $link = new Link("Incluir");
-                $link->set_id("linkInclusao");
-                $link->set_title('Inclui uma data de compra');
-                $link->set_onClick("abreDivId('gasInclusao');fechaDivId('gasLista');");
-                $link->show();
-  
-                $div3->fecha();
+            $div3 = new Div("gasLista");
+            $div3->abre();
+            $objeto->listar();  
+            $div3->fecha();
+            
+            # Cria um menu
+            $menu = new MenuBar();
+
+            # Link de inclusão
+            $linkIncluir = new Button("Incluir");
+            $linkIncluir->set_title('Inclui uma data de compra');
+            $linkIncluir->set_onClick("abreDivId('gasInclusao');fechaDivId('gasLista');");
+            $menu->add_link($linkIncluir,"right");
+
+            # Editar
+            $linkGas = new Link("Editar","gas.php");
+            $linkGas->set_class('button');
+            $linkGas->set_title('Acessa o Controle de gas');
+            $menu->add_link($linkGas,"right");
+
+            $menu->show();
                 
             $grid1->fechaColuna();
             
@@ -278,7 +290,7 @@ switch ($fase)
                 
             # Percorre os feeds
             foreach($rss as $tt){
-                $grid1->abreColuna(4);
+                $grid1->abreColuna(12,6,3);
                 tituloTable($tt[0]);
                 $noticias = feed($tt[1]);
                 

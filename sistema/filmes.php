@@ -42,30 +42,34 @@ switch ($fase)
         $grid = new Grid();
                 
         # Percorre a pasta
-        foreach ($dir as $fileInfo) {
-            $ext = strtolower( $fileInfo->getExtension() );
+        foreach($dir as $fileInfo){
+            $ext = strtolower($fileInfo->getExtension());
             if( in_array($ext,$types)){
-                $nome = $fileInfo->getFilename();
-                $partesNome = explode('-',$nome);
-                $titulo = $partesNome[0];
-                $arquivo = $partesNome[1];
-                
-                # Verifica se inicia ou não um novo título
-                if($tituloAnterior <> $titulo){
-                    if(!is_null($tituloAnterior)){
-                        $grid->fechaColuna(); 
-                    }
-                    
-                    $grid->abreColuna(12,6,4);
-                    tituloTable($titulo);
-                    $tituloAnterior = $titulo;
-                    
-                }
-                
-                $link = new Link($arquivo,"?fase=filme&nome=".$nome);
-                $link->show(); 
-                br();
+                $arquivosRecolhidos[] = $fileInfo->getFilename();
             }
+        }
+        
+        sort($arquivosRecolhidos);
+        
+        foreach($arquivosRecolhidos as $lista){
+            $partesNome = explode('-',$lista);
+            $titulo = $partesNome[0];
+            $arquivo = $partesNome[1];
+                
+            # Verifica se inicia ou não um novo título
+            if($tituloAnterior <> $titulo){
+                if(!is_null($tituloAnterior)){
+                    $grid->fechaColuna(); 
+                }
+                   
+                $grid->abreColuna(12,6,4);
+                tituloTable($titulo);
+                $tituloAnterior = $titulo;
+            }
+                
+            $link = new Link($arquivo,"?fase=filme&nome=".$nome);
+            $link->show(); 
+            br();
         }
         $grid->fechaGrid();
         break;

@@ -129,7 +129,16 @@ switch ($fase)
             $botao->set_label('Filmes');
             $botao->set_url('filmes.php');
             $botao->set_image(PASTA_FIGURAS.'video.png',$tamanhoImage,$tamanhoImage);
-            $botao->set_title('Filmes');
+            $botao->set_title('Vídeos para ver offline');
+            #$botao->set_accesskey('C');
+            $menu->add_item($botao);
+            
+            # You Tube
+            $botao = new BotaoGrafico();
+            $botao->set_label('YouTube');
+            $botao->set_url('youtube.php');
+            $botao->set_image(PASTA_FIGURAS.'youtube.png',$tamanhoImage,$tamanhoImage);
+            $botao->set_title('Vídeos para ver online');
             #$botao->set_accesskey('C');
             $menu->add_item($botao);
 

@@ -67,7 +67,7 @@ switch ($fase)
                 $tituloAnterior = $titulo;
             }
                 
-            $link = new Link($arquivo,"?fase=filme&nome=".$nome);
+            $link = new Link($arquivo,"?fase=filme&nome=".$lista);
             $link->show(); 
             br();
         }
